@@ -3,64 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mastermind</title>
+    <title>Mastermind Game</title>
+    <link rel="stylesheet" href="./css/style.css">
     <script defer src="./js/app.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Mastermind</h1>
-        <div class="board">
-            <div class="answer-container">
-                <div class="answer-box">
-                    <div class="answer">
-
-                    </div>
-                </div>
-                   
-                <div class="button-container">
-                    <div class="submit-btn">
-                        <h3 class="text">Submit</h3>
-                    </div>
+    <div class="board">
+        <div class="answer-container">
+            <div class="answer-box">
+                <div class="answer">
+                    
                 </div>
             </div>
-            <div class="guess-container">
-                <div class="guess-row">
-                    <div class="guess-pegs">
-                        <div class="guess-peg"></div>
-                        <div class="guess-peg"></div>
-                        <div class="guess-peg"></div>
-                        <div class="guess-peg"></div>
-                    </div>
-                    <div class="grade-pegs">
-                        <div class="grade-peg"></div>
-                        <div class="grade-peg"></div>
-                        <div class="grade-peg"></div>
-                        <div class="grade-peg"></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="color-container">
-
+            <div class="button-container">
+                <button class="submit-btn">Submit</button>
             </div>
         </div>
-    <p>Mastermind is a code-breaking game
-    typically played with a decoding board and colored pegs.
-    One player, the code maker, secretly arranges a sequence
-    of four colored pegs behind a shield, which becomes the
-    secret code. The other player, the code breaker, has a set
-    number of attempts to guess the code. For each attempt,
-    the code breaker arranges a row of pegs on the board.
-    After each guess, the code maker provides feedback using
-    small pegs: a black peg indicates a correct color in the
-    correct position, while a white peg indicates a correct
-    color in the wrong position. No peg means the color is not
-    in the code. The game continues until the code breaker
-    correctly guesses the code or runs out of attempts.</p>
+        <div class="guess-container">
+            
+        </div>
+        <div class="color-container">
+            
+            <div class="color-outer"><div class="color-inner red"></div></div>
+            <div class="color-outer"><div class="color-inner green"></div></div>
+            <div class="color-outer"><div class="color-inner blue"></div></div>
+            <div class="color-outer"><div class="color-inner yellow"></div></div>
+            <div class="color-outer"><div class="color-inner orange"></div></div>
+            <div class="color-outer"><div class="color-inner purple"></div></div>
+        </div>
+    </div>
 
-
+    <p>Mastermind is a code-breaking game where the objective is to guess a secret
+    code made up of 4 colors. The code breaker (you) has 10 attempts to crack the 
+    code by selecting colors from a palette and placing them in slots on the current 
+    row. After submitting a guess, feedback is provided: black pegs indicate correct
+    colors in the correct positions, while white pegs indicate correct colors in the 
+    wrong positions. Use this feedback to refine your guesses. The game is won by 
+    guessing the exact code (4 black pegs) within 10 attempts; otherwise, the secret 
+    code is revealed.</p>
 </body>
-
-
 </html>
-
