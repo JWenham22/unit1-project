@@ -59,7 +59,7 @@ h1 {
     justify-content: center;
 }
 
-.submit-btn {
+.submit-btn, .delete-btn, .reset-btn {
     padding: 10px;
     font-weight: bold;
     border: 1px solid black;
@@ -72,11 +72,23 @@ h1 {
     background: deepskyblue;
 }
 
+.delete-btn:hover {
+    background: deepskyblue;
+}
+
+.reset-btn:hover {
+    background: deepskyblue;
+}
+
 /* Guess Rows */
 .guess-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.delete-btn, .reset-btn {
+    margin: auto;
 }
 
 .guess-row {

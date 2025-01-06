@@ -16,61 +16,70 @@
 
 
 
-// Initialize Game
+// Define colors as the list of possible colors.
+// Initialize secretCode as an empty array.
+// Initialize currentRow to 0.
+// Initialize currentGuess as an empty array.
+
+// Get reference to .guess-container.
+// Get all .color-inner elements.
+// Get reference to .submit-btn.
 // Generate Secret Code:
 
-// Generate a random sequence of 4 colors 
-// Store this sequence as secret_code.
-// Set Up Game Variables:
+// Create a function generateSecretCode:
+// Randomly select 4 colors from the colors array and store them in secretCode.
 
-// max_attempts = 10
-// attempts = 0
-// game_over = false
-// Game Loop
-// While attempts < max_attempts and game_over == false:
-// Prompt Player Input:
+// Create a function createRows:
+// Loop 10 times to create 10 rows:
+// For each row:
+// Create a guess-colors section with 4 empty slots.
+// Create a grade-colors section with 4 empty slots for feedback.
+// Append both sections to a new row and add it to .guess-container.
+// Add Color to Current Guess:
 
-// Ask the player to guess a sequence of 4 colors.
-// Store the input as player_guess.
-// Validate Input:
+// Loop through colorOptions:
+// Add a click event listener for each color option:
+// Get the color from the clicked element.
+// Find the first empty slot in the current row.
+// Fill the slot with the selected color.
+// Add the color to currentGuess.
 
-// Ensure player_guess contains 4 valid colors from the set.
-// If invalid, ask the player to re-enter their guess.
-// Check Guess Against secret_code:
+// Add a click event listener to the submitButton:
+// If currentGuess is not fully filled:
+// Alert the player to complete their guess.
+// Otherwise:
+// Call checkGuess to compare currentGuess with secretCode.
+// Call displayFeedback to show the result.
+// If all 4 colors are correct:
+// Alert the player they won.
+// Clear currentGuess.
+// Increment currentRow.
+// If currentRow exceeds 10:
+// Alert the player they lost and show the secret code.
+// Check Guess:
 
-// Initialize counters:
+// Create a function checkGuess(guess):
+// Initialize feedback with black = 0 and white = 0.
+// Create copies of secretCode and guess.
+// Loop through guess to check for exact matches (black pegs):
+// If a color matches the secret code at the same position:
+// Increment black.
+// Remove the matched color from both copies.
+// Loop through guess again to check for partial matches (white pegs):
+// If a color exists in the secret code (but not exact position):
+// Increment white.
+// Remove the matched color from the secret code copy.
+// Return feedback.
+// Display Feedback:
 
-// correct_position = 0
-// correct_color = 0
-// Create a copy of secret_code to track matched colors.
+// Create a function displayFeedback(feedback):
+// Get feedback slots for the current row.
+// Fill black feedback slots with black.
+// Fill white feedback slots with white.
+// Initialize the Game:
 
-// First Pass (Correct Position):
-
-// For each index i in player_guess:
-// If player_guess[i] == secret_code[i], increment correct_position.
-// Mark this position as checked in the copied secret_code.
-// Second Pass (Correct Color, Wrong Position):
-
-// For each color in player_guess:
-// If color exists in the remaining unmatched secret_code:
-// Increment correct_color.
-// Remove this color from the copied secret_code.
-// Provide Feedback:
-
-// Display the number of correct_position and correct_color.
-// Check for Win:
-
-// If correct_position == 4:
-// Set game_over = true.
-// Print "Congratulations! You guessed the secret code!"
-// Increment Attempts:
-
-// Increment attempts.
-// End Game
-// If attempts == max_attempts and game_over == false:
-// Print "Game Over! You've used all attempts."
-// Reveal the secret_code.
-
+// Call generateSecretCode to set the secret code.
+// Call createRows to set up the game board.
 
 
 
@@ -83,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const guessContainer = document.querySelector(".guess-container");
     const colorOptions = document.querySelectorAll(".color-inner");
     const submitButton = document.querySelector(".submit-btn");
+    const resetButton = document.querySelector(".reset-btn"); 
+    const deleteButton = document.querySelector(".delete-btn"); 
 
     // Generate Secret Code
     function generateSecretCode() {
@@ -92,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Create Guess Rows
     function createRows() {
+        guessContainer.innerHTML = ""; // Clear any existing rows (important for reset)
         for (let i = 0; i < 10; i++) {
             const row = document.createElement("div");
             row.classList.add("guess-row");
@@ -157,6 +169,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Reset Button 
+    resetButton.addEventListener("click", () => {
+        // Reset game state
+        currentRow = 0;
+        currentGuess = [];
+        secretCode = [];
+        
+        // Generate new game setup
+        generateSecretCode();
+        createRows();
+    });
+
+    // Delete Button 
+    deleteButton.addEventListener("click", () => {
+        if (currentGuess.length > 0) {
+            // Remove last color from the guess array
+            currentGuess.pop();
+
+            // Clear the last filled slot in the current row
+            const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color");
+            for (let i = currentRowElement.length - 1; i >= 0; i--) {
+                if (currentRowElement[i].style.backgroundColor) {
+                    currentRowElement[i].style.backgroundColor = "";
+                    break;
+                }
+            }
+        }
+    });
+
     // Check Guess
     function checkGuess(guess) {
         let feedback = { black: 0, white: 0 };
@@ -167,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         guessCopy.forEach((color, index) => {
             if (color === codeCopy[index]) {
                 feedback.black++;
-                codeCopy[index] = null;
+                codeCopy[index] = null; 
                 guessCopy[index] = null;
             }
         });
