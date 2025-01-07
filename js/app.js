@@ -84,156 +84,210 @@
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const colors = ["red", "green", "blue", "yellow", "orange", "purple"];
-    let secretCode = [];
-    let currentRow = 0;
-    let currentGuess = [];
+    const colors = ["red", "green", "blue", "yellow", "orange", "purple"]
+    let secretCode = []
+    let currentRow = 0
+    let currentGuess = []
 
-    const guessContainer = document.querySelector(".guess-container");
-    const colorOptions = document.querySelectorAll(".color-inner");
-    const submitButton = document.querySelector(".submit-btn");
-    const resetButton = document.querySelector(".reset-btn"); 
-    const deleteButton = document.querySelector(".delete-btn"); 
+    const guessContainer = document.querySelector(".guess-container")
+    const colorOptions = document.querySelectorAll(".color-inner")
+    const submitButton = document.querySelector(".submit-btn")
+    const resetButton = document.querySelector(".reset-btn")
+    const deleteButton = document.querySelector(".delete-btn")
+
+
+    //speech function
+    function speakColor(color) {
+        const utterance = new SpeechSynthesisUtterance(color)
+        speechSynthesis.speak(utterance)
+    }
+
+    // // Speak text when hovering over Submit button
+    // submitButton.addEventListener("mouseenter", () => {
+    // speakText("Submit");
+    // });
+
+    // // Speak text when hovering over Reset button
+    // resetButton.addEventListener("mouseenter", () => {
+    // speakText("Reset");
+    // });
+
+    // // Speak text when hovering over Delete button
+    // deleteButton.addEventListener("mouseenter", () => {
+    // speakText("Delete Last Color");
+    // });
+    
+
+    // Adding colors to current guess
+    colorOptions.forEach((colorOption) => {
+        colorOption.addEventListener("click", (e) => {
+            // Determines the color clicked
+            const selectedColor = e.target.classList[1]
+            const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color")
+    
+            // Ensure that a color is added only if there is an empty slot
+            let colorAdded = false
+            for (let slot of currentRowElement) {
+                if (!slot.style.backgroundColor && !colorAdded) {
+                    slot.style.backgroundColor = selectedColor
+                    currentGuess.push(selectedColor)
+                    colorAdded = true // Mark that the color was added
+    
+                    // Speak the color name
+                    speakColor(selectedColor)
+                }
+            }
+        })
+    })
+    
+
 
     // Generate Secret Code
     function generateSecretCode() {
-        secretCode = Array.from({ length: 4 }, () => colors[Math.floor(Math.random() * colors.length)]);
-        console.log("Secret Code:", secretCode); 
+        // Creates an array of 4 elements
+        // Each element is randomly selected from the colors array
+        secretCode = Array.from({ length: 4 }, () => colors[Math.floor(Math.random() * colors.length)]) 
+        console.log("Secret Code:", secretCode) 
     }
 
     // Create Guess Rows
     function createRows() {
-        guessContainer.innerHTML = ""; // Clear any existing rows (important for reset)
+        guessContainer.innerHTML = "" // Clear any existing rows (important for reset)
+        // Creates 10 rows 
         for (let i = 0; i < 10; i++) {
-            const row = document.createElement("div");
-            row.classList.add("guess-row");
+            const row = document.createElement("div")
+            row.classList.add("guess-row")
 
-            const guessColors = document.createElement("div");
-            guessColors.classList.add("guess-colors");
+            const guessColors = document.createElement("div")
+            guessColors.classList.add("guess-colors")
+            // Creates 4 guess color slots for when color is selected
             for (let j = 0; j < 4; j++) {
-                const colorSlot = document.createElement("div");
-                colorSlot.classList.add("guess-color");
-                guessColors.appendChild(colorSlot);
+                const colorSlot = document.createElement("div")
+                colorSlot.classList.add("guess-color")
+                guessColors.appendChild(colorSlot)
             }
 
-            const gradeColors = document.createElement("div");
-            gradeColors.classList.add("grade-colors");
+            const gradeColors = document.createElement("div")
+            gradeColors.classList.add("grade-colors")
+            // Creates 4 grade color slots for when the player clicks submit
             for (let j = 0; j < 4; j++) {
-                const gradeSlot = document.createElement("div");
-                gradeSlot.classList.add("grade-color");
-                gradeColors.appendChild(gradeSlot);
+                const gradeSlot = document.createElement("div")
+                gradeSlot.classList.add("grade-color")
+                gradeColors.appendChild(gradeSlot)
             }
 
-            row.appendChild(guessColors);
-            row.appendChild(gradeColors);
-            guessContainer.appendChild(row);
+            row.appendChild(guessColors)
+            row.appendChild(gradeColors)
+            guessContainer.appendChild(row)
         }
     }
 
-    // Add Color to Current Guess
-    colorOptions.forEach((colorOption) => {
-        colorOption.addEventListener("click", (e) => {
-            const selectedColor = e.target.classList[1];
-            const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color");
+    // // Add Color to Current Guess
+    // colorOptions.forEach((colorOption) => {
+    //     colorOption.addEventListener("click", (e) => {
+    //         const selectedColor = e.target.classList[1]
+    //         const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color")
 
-            for (let slot of currentRowElement) {
-                if (!slot.style.backgroundColor) {
-                    slot.style.backgroundColor = selectedColor;
-                    currentGuess.push(selectedColor);
-                    break;
-                }
-            }
-        });
-    });
+    //         for (let slot of currentRowElement) {
+    //             if (!slot.style.backgroundColor) {
+    //                 slot.style.backgroundColor = selectedColor
+    //                 currentGuess.push(selectedColor)
+    //                 break
+    //             }
+    //         }
+    //     })
+    // })
 
     // Submit Guess
     submitButton.addEventListener("click", () => {
+        // Ensures the player has selected 4 colors before submitting
         if (currentGuess.length < 4) {
-            alert("Please fill all slots before submitting.");
-            return;
+            alert("Please fill all slots before submitting.")
+            return
         }
 
-        const feedback = checkGuess(currentGuess);
-        displayFeedback(feedback);
+        // Evaluates the guess and displays feedback
+        const feedback = checkGuess(currentGuess)
+        displayFeedback(feedback)
 
         if (feedback.black === 4) {
-            alert("Congratulations! You've guessed the code!");
-            return;
+            alert("Congratulations! You've guessed the code!")
+            return
         }
 
-        currentGuess = [];
-        currentRow++;
+        currentGuess = []
+        currentRow++
 
         if (currentRow >= 10) {
-            alert("Game Over! The secret code was: " + secretCode.join(", "));
+            alert("Game Over! The secret code was: " + secretCode.join(", "))
         }
-    });
+    })
 
     // Reset Button 
     resetButton.addEventListener("click", () => {
-        // Reset game state
-        currentRow = 0;
-        currentGuess = [];
-        secretCode = [];
+        // Resets game 
+        currentRow = 0
+        currentGuess = []
+        secretCode = []
         
         // Generate new game setup
-        generateSecretCode();
-        createRows();
-    });
+        generateSecretCode()
+        createRows()
+    })
 
     // Delete Button 
     deleteButton.addEventListener("click", () => {
         if (currentGuess.length > 0) {
-            // Remove last color from the guess array
-            currentGuess.pop();
+            // Delete the last color from the guess array
+            currentGuess.pop()
 
             // Clear the last filled slot in the current row
-            const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color");
+            const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color")
             for (let i = currentRowElement.length - 1; i >= 0; i--) {
                 if (currentRowElement[i].style.backgroundColor) {
-                    currentRowElement[i].style.backgroundColor = "";
-                    break;
+                    currentRowElement[i].style.backgroundColor = ""
+                    break
                 }
             }
         }
-    });
+    })
 
     // Check Guess
     function checkGuess(guess) {
-        let feedback = { black: 0, white: 0 };
-        let codeCopy = [...secretCode];
-        let guessCopy = [...guess];
+        let feedback = { black: 0, white: 0 }
+        let codeCopy = [...secretCode]
+        let guessCopy = [...guess]
 
         // Check for black pegs
         guessCopy.forEach((color, index) => {
             if (color === codeCopy[index]) {
-                feedback.black++;
-                codeCopy[index] = null; 
-                guessCopy[index] = null;
+                feedback.black++
+                codeCopy[index] = null
+                guessCopy[index] = null
             }
-        });
+        })
 
         // Check for white pegs
         guessCopy.forEach((color) => {
             if (color && codeCopy.includes(color)) {
-                feedback.white++;
-                codeCopy[codeCopy.indexOf(color)] = null;
+                feedback.white++
+                codeCopy[codeCopy.indexOf(color)] = null
             }
-        });
+        })
 
-        return feedback;
+        return feedback
     }
 
     // Display Feedback
     function displayFeedback({ black, white }) {
-        const gradeSlots = guessContainer.children[currentRow].querySelectorAll(".grade-color");
-        let index = 0;
+        const gradeSlots = guessContainer.children[currentRow].querySelectorAll(".grade-color")
+        let index = 0
 
-        for (let i = 0; i < black; i++) gradeSlots[index++].style.backgroundColor = "black";
-        for (let i = 0; i < white; i++) gradeSlots[index++].style.backgroundColor = "white";
+        for (let i = 0; i < black; i++) gradeSlots[index++].style.backgroundColor = "black"
+        for (let i = 0; i < white; i++) gradeSlots[index++].style.backgroundColor = "white"
     }
 
     // Initialize Game
-    generateSecretCode();
-    createRows();
-});
+    generateSecretCode()
+    createRows()
+})
