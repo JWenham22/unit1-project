@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let secretCode = []
     let currentRow = 0
     let currentGuess = []
+    let hoverTime
 
     const guessContainer = document.querySelector(".guess-container")
     const colorOptions = document.querySelectorAll(".color-inner")
@@ -102,20 +103,56 @@ document.addEventListener("DOMContentLoaded", () => {
         speechSynthesis.speak(utterance)
     }
 
-    // // Speak text when hovering over Submit button
-    // submitButton.addEventListener("mouseenter", () => {
-    // speakText("Submit");
-    // });
+    // Speak text when hovering over Submit button
+    function speakSubmit() {
+        const utterance = new SpeechSynthesisUtterance("Submit")
+        speechSynthesis.speak(utterance)
+    }
+    submitButton.addEventListener("mouseenter", () => {
+        // Adds a 1 second hover time before the audio
+        hoverTime = setTimeout(() => {
+            speakSubmit()
+        }, 1000)
+    })
 
-    // // Speak text when hovering over Reset button
-    // resetButton.addEventListener("mouseenter", () => {
-    // speakText("Reset");
-    // });
+    submitButton.addEventListener("mouseleave", () => {
+        // Clears time when mouse leaves 
+        clearTimeout(hoverTime)
+    })
 
-    // // Speak text when hovering over Delete button
-    // deleteButton.addEventListener("mouseenter", () => {
-    // speakText("Delete Last Color");
-    // });
+    // Speak text when hovering over Reset button
+    function speakReset() {
+        const utterance = new SpeechSynthesisUtterance("Reset")
+        speechSynthesis.speak(utterance)
+    }
+    resetButton.addEventListener("mouseenter", () => {
+        // Adds a 1 second hover time before the audio
+        hoverTime = setTimeout(() => {
+            speakReset()
+        }, 1000)
+    })
+
+    resetButton.addEventListener("mouseleave", () => {
+        // Clears time when mouse leaves
+        clearTimeout(hoverTime)
+    })
+
+    // Speak text when hovering over Delete button
+    function speakDelete() {
+        const utterance = new SpeechSynthesisUtterance("Delete")
+        speechSynthesis.speak(utterance)
+    }
+    deleteButton.addEventListener("mouseenter", () => {
+        // Adds a 1 second hover time before the audio
+        hoverTime = setTimeout(() => {
+            speakDelete()
+        }, 1000)
+    })
+
+    deleteButton.addEventListener("mouseleave", () => {
+        // Clears time when mouse leaves
+        clearTimeout(hoverTime)
+    })
     
 
     // Adding colors to current guess
@@ -182,21 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // // Add Color to Current Guess
-    // colorOptions.forEach((colorOption) => {
-    //     colorOption.addEventListener("click", (e) => {
-    //         const selectedColor = e.target.classList[1]
-    //         const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color")
-
-    //         for (let slot of currentRowElement) {
-    //             if (!slot.style.backgroundColor) {
-    //                 slot.style.backgroundColor = selectedColor
-    //                 currentGuess.push(selectedColor)
-    //                 break
-    //             }
-    //         }
-    //     })
-    // })
 
     // Submit Guess
     submitButton.addEventListener("click", () => {
