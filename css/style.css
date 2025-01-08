@@ -1,11 +1,12 @@
 
 
 
+  
 
 /* General Styling */
 body {
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: Merriweather, serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,11 +19,57 @@ body {
 h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    margin-top: 10px
 }
 
-button {
-    
+#changeBackgroundButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #1c92a7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
+
+#changeBackgroundButton:hover {
+    background-color: #45a049;
+}
+
+
+/* Message Box */
+.message-box {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.2em;
+    z-index: 1000;
+    text-align: center;
+    transition: opacity 0.5s ease;
+}
+
+.message-box.show {
+    display: block;
+    opacity: 1;
+}
+
+.message-box.hide {
+    opacity: 0;
+}
+
 
 /* Game Board */
 .board {
@@ -31,6 +78,7 @@ button {
     border: 1px solid black;
     padding: 10px;
     box-sizing: border-box;
+    margin-top: 20px
 }
 
 /* Answer Row */
@@ -169,4 +217,13 @@ button {
 p {
     margin: auto;
     max-width: 700px;
+    line-height: 28px
 }
+
+.paragraph-box {
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: rgb(222, 220, 220);
+}
+

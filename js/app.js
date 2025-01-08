@@ -220,11 +220,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    function showMessage(message, type = "info") {
+        const messageBox = document.getElementById("messageBox");
+    
+        // Set the message and style based on type
+        messageBox.textContent = message;
+        if (type === "success") {
+            messageBox.style.backgroundColor = "#d4edda"; // Green
+            messageBox.style.color = "#155724";
+            messageBox.style.borderColor = "#c3e6cb";
+        } else if (type === "error") {
+            messageBox.style.backgroundColor = "#f8d7da"; // Red
+            messageBox.style.color = "#721c24";
+            messageBox.style.borderColor = "#f5c6cb";
+        } else {
+            messageBox.style.backgroundColor = "#f8f9fa"; // Neutral
+            messageBox.style.color = "#333";
+            messageBox.style.borderColor = "#ccc";
+        }
+    
+        // Show the message box
+        messageBox.classList.add("show");
+        messageBox.classList.remove("hide");
+    
+        // Hide the message box after 3 seconds
+        setTimeout(() => {
+            messageBox.classList.add("hide");
+            messageBox.classList.remove("show");
+        }, 3000);
+    }
+    
+    
     // Submit Guess
     submitButton.addEventListener("click", () => {
         // Ensures the player has selected 4 colors before submitting
         if (currentGuess.length < 4) {
-            alert("Please fill all slots before submitting.")
+            showMessage("Please fill all slots before submitting.")
             return
         }
 
@@ -233,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
         displayFeedback(feedback)
 
         if (feedback.black === 4) {
-            alert("Congratulations! You've guessed the code!")
+            showMessage("Congratulations! You've guessed the code!")
             return
         }
 
@@ -241,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentRow++
 
         if (currentRow >= 10) {
-            alert("Game Over! The secret code was: " + secretCode.join(", "))
+            showMessage("Game Over! The secret code was: " + secretCode.join(", "))
         }
     })
 
@@ -308,6 +339,38 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < black; i++) gradeSlots[index++].style.backgroundColor = "black"
         for (let i = 0; i < white; i++) gradeSlots[index++].style.backgroundColor = "white"
     }
+
+
+    document.getElementById("changeBackgroundButton").addEventListener("click", () => {
+        const selector = document.getElementById("backgroundSelector");
+        const selectedBackground = selector.value;
+    
+        // Apply the corresponding background image
+        switch (selectedBackground) {
+            case "beach":
+                document.body.style.backgroundImage = "url()";
+                break;
+            case "space":
+                document.body.style.backgroundImage = "url()";
+                break;
+            case "desert":
+                document.body.style.backgroundImage = "url()";
+                break;
+            case "forest":
+                document.body.style.backgroundImage = "url()";
+                break;
+            case "city":
+                document.body.style.backgroundImage = "url()";
+                break;
+            case "country-side":
+                document.body.style.backgroundImage = "url()";
+                break;
+            default:
+                document.body.style.backgroundImage = ""; // Reset to default
+        }
+    });
+    
+
 
     // Initialize Game
     generateSecretCode()
