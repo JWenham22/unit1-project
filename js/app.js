@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     submitButton.addEventListener("mouseenter", () => {
         hoverTime = setTimeout(() => {
             speakSubmit()
-        }, 750)
+        }, 500)
     })
 
     submitButton.addEventListener("mouseleave", () => {
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resetButton.addEventListener("mouseenter", () => {
         hoverTime = setTimeout(() => {
             speakReset()
-        }, 750)
+        }, 500)
     })
 
     resetButton.addEventListener("mouseleave", () => {
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteButton.addEventListener("mouseenter", () => {
         hoverTime = setTimeout(() => {
             speakDelete()
-        }, 750)
+        }, 500)
     })
 
     deleteButton.addEventListener("mouseleave", () => {
