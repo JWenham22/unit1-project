@@ -348,23 +348,36 @@ document.addEventListener("DOMContentLoaded", () => {
         // Apply the corresponding background image
         switch (selectedBackground) {
             case "beach":
-                document.body.style.backgroundImage = "url()";
+                document.body.style.backgroundImage = "url('https://wallpapercave.com/wp/wp6782679.jpg')";
+                document.body.style.backgroundSize = "cover"; // Fill the page
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundRepeat = "no-repeat";
                 break;
-            case "space":
-                document.body.style.backgroundImage = "url()";
-                break;
-            case "desert":
-                document.body.style.backgroundImage = "url()";
+            case "mountain":
+                document.body.style.backgroundImage = "url('https://wallpapers.com/images/featured/patagonia-y5yq50svrz3x20oq.jpg')";
+                document.body.style.backgroundSize = "cover"; // Fill the page
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundRepeat = "no-repeat";
                 break;
             case "forest":
-                document.body.style.backgroundImage = "url()";
+                document.body.style.backgroundImage = "url('https://4kwallpapers.com/images/walls/thumbs_3t/14776.jpg')";
+                document.body.style.backgroundSize = "cover"; // Fill the page
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundRepeat = "no-repeat"
                 break;
             case "city":
-                document.body.style.backgroundImage = "url()";
+                document.body.style.backgroundImage = "url('https://images2.alphacoders.com/546/546678.jpg')";
+                document.body.style.backgroundSize = "cover"; // Fill the page
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundRepeat = "no-repeat"
                 break;
             case "country-side":
-                document.body.style.backgroundImage = "url()";
+                document.body.style.backgroundImage = "url('https://images.pexels.com/photos/1662145/pexels-photo-1662145.jpeg?cs=srgb&dl=pexels-fotios-photos-1662145.jpg&fm=jpg')";
+                document.body.style.backgroundSize = "cover"; // Fill the page
+                document.body.style.backgroundPosition = "center";
+                document.body.style.backgroundRepeat = "no-repeat"
                 break;
+
             default:
                 document.body.style.backgroundImage = ""; // Reset to default
         }
