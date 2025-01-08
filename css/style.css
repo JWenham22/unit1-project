@@ -23,6 +23,25 @@ h1 {
     margin-top: 10px
 }
 
+.audio-toggle-btn {
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    padding: 10px 20px;
+    margin: 20px;
+    background-color:#1c92a7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow:0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.audio-toggle-btn:hover {
+    background-color: #45a049;
+}
+
 #changeBackgroundButton {
     position: fixed;
     bottom: 20px;

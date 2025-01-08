@@ -107,113 +107,200 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentRow = 0
     let currentGuess = []
     let hoverTime
+    let isAudioEnabled = true
 
     const guessContainer = document.querySelector(".guess-container")
     const colorOptions = document.querySelectorAll(".color-inner")
     const submitButton = document.querySelector(".submit-btn")
     const resetButton = document.querySelector(".reset-btn")
     const deleteButton = document.querySelector(".delete-btn")
+    const audioToggleButton = document.querySelector(".audio-toggle-btn")
 
 
-    //speech function
+    // Toggle audio functionality
+    audioToggleButton.addEventListener("click", () => {
+        isAudioEnabled = !isAudioEnabled
+        audioToggleButton.textContent = isAudioEnabled ? "Audio: On" : "Audio: Off"
+    })
+
+    // Speech function with audio check
     function speakColor(color) {
+        if (!isAudioEnabled) return // Exit if audio is disabled
         const utterance = new SpeechSynthesisUtterance(color)
         speechSynthesis.speak(utterance)
-    }
 
-    // Speak text when hovering over Submit button
+    }
+    // Speak text for submit button
     function speakSubmit() {
+        if (!isAudioEnabled) return
         const utterance = new SpeechSynthesisUtterance("Submit")
         speechSynthesis.speak(utterance)
     }
+
+    // Speak text for reset button
+    function speakReset() {
+        if (!isAudioEnabled) return
+        const utterance = new SpeechSynthesisUtterance("Reset")
+        speechSynthesis.speak(utterance)
+    }
+
+    // Speak text for delete button
+    function speakDelete() {
+        if (!isAudioEnabled) return
+        const utterance = new SpeechSynthesisUtterance("Delete")
+        speechSynthesis.speak(utterance)
+    }
+
+    // Submit button hover
     submitButton.addEventListener("mouseenter", () => {
-        // Adds a 1 second hover time before the audio
         hoverTime = setTimeout(() => {
             speakSubmit()
         }, 1000)
     })
 
     submitButton.addEventListener("mouseleave", () => {
-        // Clears time when mouse leaves 
         clearTimeout(hoverTime)
     })
 
-    // Speak text when hovering over Reset button
-    function speakReset() {
-        const utterance = new SpeechSynthesisUtterance("Reset")
-        speechSynthesis.speak(utterance)
-    }
+    // Reset button hover
     resetButton.addEventListener("mouseenter", () => {
-        // Adds a 1 second hover time before the audio
         hoverTime = setTimeout(() => {
             speakReset()
         }, 1000)
     })
 
     resetButton.addEventListener("mouseleave", () => {
-        // Clears time when mouse leaves
         clearTimeout(hoverTime)
     })
 
-    // Speak text when hovering over Delete button
-    function speakDelete() {
-        const utterance = new SpeechSynthesisUtterance("Delete")
-        speechSynthesis.speak(utterance)
-    }
+    // Delete button hover
     deleteButton.addEventListener("mouseenter", () => {
-        // Adds a 1 second hover time before the audio
         hoverTime = setTimeout(() => {
             speakDelete()
         }, 1000)
     })
 
     deleteButton.addEventListener("mouseleave", () => {
-        // Clears time when mouse leaves
         clearTimeout(hoverTime)
     })
-    
 
-    // Adding colors to current guess
-    colorOptions.forEach((colorOption) => {
-        colorOption.addEventListener("click", (e) => {
-            // Determines the color clicked
-            const selectedColor = e.target.classList[1]
-            const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color")
-    
-            // Ensure that a color is added only if there is an empty slot
-            let colorAdded = false
-            for (let slot of currentRowElement) {
-                if (!slot.style.backgroundColor && !colorAdded) {
-                    slot.style.backgroundColor = selectedColor
-                    currentGuess.push(selectedColor)
-                    colorAdded = true // Mark that the color was added
-                }
-            }
-        })
-    })
-    
     // Add speech functionality for color options
     colorOptions.forEach((colorOption) => {
-        let hoverTimer; // Timer to track hover time
+        let hoverTimer
 
         colorOption.addEventListener("mouseenter", (e) => {
-            // Start a timer when the mouse enters the color option
+            if (!isAudioEnabled) return; // Skip audio if disabled
             hoverTimer = setTimeout(() => {
-                const selectedColor = e.target.classList[1]; // Get the color class
-                speakColor(selectedColor); // Speak the color name
-            }, 500); // 1 second delay
-        });
+                const selectedColor = e.target.classList[1]
+                speakColor(selectedColor)
+            }, 500)
+        })
 
         colorOption.addEventListener("mouseleave", () => {
-            // Clear the timer if the mouse leaves before 1 second
-            clearTimeout(hoverTimer);
-        });
+            clearTimeout(hoverTimer)
+        })
+    })
+
+    // //speech function
+    // function speakColor(color) {
+    //     const utterance = new SpeechSynthesisUtterance(color)
+    //     speechSynthesis.speak(utterance)
+    // }
+
+    // // Speak text when hovering over Submit button
+    // function speakSubmit() {
+    //     const utterance = new SpeechSynthesisUtterance("Submit")
+    //     speechSynthesis.speak(utterance)
+    // }
+    // submitButton.addEventListener("mouseenter", () => {
+    //     // Adds a 1 second hover time before the audio
+    //     hoverTime = setTimeout(() => {
+    //         speakSubmit()
+    //     }, 1000)
+    // })
+
+    // submitButton.addEventListener("mouseleave", () => {
+    //     // Clears time when mouse leaves 
+    //     clearTimeout(hoverTime)
+    // })
+
+    // // Speak text when hovering over Reset button
+    // function speakReset() {
+    //     const utterance = new SpeechSynthesisUtterance("Reset")
+    //     speechSynthesis.speak(utterance)
+    // }
+    // resetButton.addEventListener("mouseenter", () => {
+    //     // Adds a 1 second hover time before the audio
+    //     hoverTime = setTimeout(() => {
+    //         speakReset()
+    //     }, 1000)
+    // })
+
+    // resetButton.addEventListener("mouseleave", () => {
+    //     // Clears time when mouse leaves
+    //     clearTimeout(hoverTime)
+    // })
+
+    // // Speak text when hovering over Delete button
+    // function speakDelete() {
+    //     const utterance = new SpeechSynthesisUtterance("Delete")
+    //     speechSynthesis.speak(utterance)
+    // }
+    // deleteButton.addEventListener("mouseenter", () => {
+    //     // Adds a 1 second hover time before the audio
+    //     hoverTime = setTimeout(() => {
+    //         speakDelete()
+    //     }, 1000)
+    // })
+
+    // deleteButton.addEventListener("mouseleave", () => {
+    //     // Clears time when mouse leaves
+    //     clearTimeout(hoverTime)
+    // })
+    
+    // Adding colors to current guess
+colorOptions.forEach((colorOption) => {
+    colorOption.addEventListener("click", (e) => {
+        // Determines the color clicked
+        const selectedColor = e.target.classList[1];
+        const currentRowElement = guessContainer.children[currentRow].querySelectorAll(".guess-color");
+
+        // Ensure that a color is added only if there is an empty slot
+        let colorAdded = false;
+        for (let slot of currentRowElement) {
+            if (!slot.style.backgroundColor && !colorAdded) {
+                slot.style.backgroundColor = selectedColor;
+                currentGuess.push(selectedColor);
+                colorAdded = true; // Mark that the color was added
+            }
+        }
     });
+});
+
+// Add speech functionality for color options
+colorOptions.forEach((colorOption) => {
+    let hoverTimer; // Timer to track hover time
+
+    colorOption.addEventListener("mouseenter", (e) => {
+        if (!isAudioEnabled) return; // Do not play audio if disabled
+        // Start a timer when the mouse enters the color option
+        hoverTimer = setTimeout(() => {
+            const selectedColor = e.target.classList[1]; // Get the color class
+            speakColor(selectedColor); // Speak the color name
+        }, 500); // 500ms delay
+    });
+
+    colorOption.addEventListener("mouseleave", () => {
+        // Clear the timer if the mouse leaves before 500ms
+        clearTimeout(hoverTimer);
+    });
+});
+
 
     // Function to speak the color name
     function speakColor(color) {
-        const utterance = new SpeechSynthesisUtterance(color);
-        speechSynthesis.speak(utterance);
+        const utterance = new SpeechSynthesisUtterance(color)
+        speechSynthesis.speak(utterance)
     }
 
 
@@ -265,17 +352,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Set the message and style based on type
         messageBox.textContent = message;
         if (type === "success") {
-            messageBox.style.backgroundColor = "#d4edda"; // Green
-            messageBox.style.color = "#155724";
-            messageBox.style.borderColor = "#c3e6cb";
+            messageBox.style.backgroundColor = "#d4edda" // Green
+            messageBox.style.color = "#155724"
+            messageBox.style.borderColor = "#c3e6cb"
         } else if (type === "error") {
-            messageBox.style.backgroundColor = "#f8d7da"; // Red
-            messageBox.style.color = "#721c24";
-            messageBox.style.borderColor = "#f5c6cb";
+            messageBox.style.backgroundColor = "#f8d7da" // Red
+            messageBox.style.color = "#721c24"
+            messageBox.style.borderColor = "#f5c6cb"
         } else {
-            messageBox.style.backgroundColor = "#f8f9fa"; // Neutral
-            messageBox.style.color = "#333";
-            messageBox.style.borderColor = "#ccc";
+            messageBox.style.backgroundColor = "#f8f9fa" // Neutral
+            messageBox.style.color = "#333"
+            messageBox.style.borderColor = "#ccc"
         }
     
         // Show the message box
@@ -286,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             messageBox.classList.add("hide");
             messageBox.classList.remove("show");
-        }, 3000);
+        }, 5000);
     }
     
     
