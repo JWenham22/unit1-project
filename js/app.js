@@ -16,70 +16,88 @@
 
 
 
-// Define colors as the list of possible colors.
-// Initialize secretCode as an empty array.
-// Initialize currentRow to 0.
-// Initialize currentGuess as an empty array.
+// Initialize Game on Page Load:
+// Define color options for the game
+// Create variables to store
+// Secret code
+// Current row being guessed
+// Current guess in progress
+// Hover timer for speech interactions
+// Select necessary DOM elements like the guess container, color options, and buttons
 
-// Get reference to .guess-container.
-// Get all .color-inner elements.
-// Get reference to .submit-btn.
-// Generate Secret Code:
+// Speech Functions for Buttons
+// Function to read the name of a color out loud
+// Function to read "Submit" when hovering over the submit button
+// Start a timer to delay speech
+// Cancel the timer if the mouse leaves the button
+// Similar functions for "Reset" and "Delete" buttons
 
-// Create a function generateSecretCode:
-// Randomly select 4 colors from the colors array and store them in secretCode.
+// Select Colors for the Current Guess
+// For each color option
+// When clicked
+// Determine the selected color
+// Check the current row for an empty slot
+// Add the color to the first empty slot and store it in the currentGuess
+// Speak the color name aloud
 
-// Create a function createRows:
-// Loop 10 times to create 10 rows:
-// For each row:
-// Create a guess-colors section with 4 empty slots.
-// Create a grade-colors section with 4 empty slots for feedback.
-// Append both sections to a new row and add it to .guess-container.
-// Add Color to Current Guess:
+// Generate the Secret Code
+// Randomly select 4 colors from the available color options
+// Store these as the secret code for the game
 
-// Loop through colorOptions:
-// Add a click event listener for each color option:
-// Get the color from the clicked element.
-// Find the first empty slot in the current row.
-// Fill the slot with the selected color.
-// Add the color to currentGuess.
+// Create Rows for Guesses
+// Clear any previous rows (important for resetting)
+// Create 10 rows, each containing
+// Four empty slots for guesses
+// Four slots for feedback (black/white pegs)
 
-// Add a click event listener to the submitButton:
-// If currentGuess is not fully filled:
-// Alert the player to complete their guess.
-// Otherwise:
-// Call checkGuess to compare currentGuess with secretCode.
-// Call displayFeedback to show the result.
-// If all 4 colors are correct:
-// Alert the player they won.
-// Clear currentGuess.
-// Increment currentRow.
-// If currentRow exceeds 10:
-// Alert the player they lost and show the secret code.
-// Check Guess:
+// Submit a Guess
+// On clicking the submit button
+// If fewer than 4 colors are selected
+// Show a message asking the player to fill all slots
+// Otherwise
+// Evaluate the guess against the secret code
+// Display feedback (black and white pegs for correct colors/positions)
+// If all 4 are correct
+// Show a "You Win!" message
+// If all rows are used and no correct guess
+// Show a "Game Over!" message with the secret code
 
-// Create a function checkGuess(guess):
-// Initialize feedback with black = 0 and white = 0.
-// Create copies of secretCode and guess.
-// Loop through guess to check for exact matches (black pegs):
-// If a color matches the secret code at the same position:
-// Increment black.
-// Remove the matched color from both copies.
-// Loop through guess again to check for partial matches (white pegs):
-// If a color exists in the secret code (but not exact position):
-// Increment white.
-// Remove the matched color from the secret code copy.
-// Return feedback.
-// Display Feedback:
+// Reset the Game
+// On clicking the reset button
+// Reset the current row, guess, and secret code
+// Generate a new secret code
+// Recreate the guess rows
 
-// Create a function displayFeedback(feedback):
-// Get feedback slots for the current row.
-// Fill black feedback slots with black.
-// Fill white feedback slots with white.
-// Initialize the Game:
+// Delete Last Color
+// On clicking the delete button
+// Remove the last selected color from the current guess
+// Clear the corresponding slot in the current row
 
-// Call generateSecretCode to set the secret code.
-// Call createRows to set up the game board.
+// Evaluate and Provide Feedback
+// Compare the current guess to the secret code
+// For exact matches (correct color and position), add a black peg
+// For correct colors in the wrong position, add a white peg
+// Ignore already-matched slots
+
+// Display Feedback
+// Add black and white feedback pegs to the feedback slots in the current row
+
+// Background Selector
+// When a background option is selected
+// Change the page background to the selected theme using specific URLs for each theme
+// Apply "cover" and "center" styles to ensure the background fits well
+
+// Message Box
+// Show messages dynamically for events like
+// "Please select all slots."
+// "You Win!"
+// "Game Over!"
+// Automatically hide the message after a few seconds
+
+// Initialize the Game
+// Generate the secret code
+// Create rows for guesses
+
 
 
 
