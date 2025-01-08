@@ -187,14 +187,35 @@ document.addEventListener("DOMContentLoaded", () => {
                     slot.style.backgroundColor = selectedColor
                     currentGuess.push(selectedColor)
                     colorAdded = true // Mark that the color was added
-    
-                    // Speak the color name
-                    speakColor(selectedColor)
                 }
             }
         })
     })
     
+    // Add speech functionality for color options
+    colorOptions.forEach((colorOption) => {
+        let hoverTimer; // Timer to track hover time
+
+        colorOption.addEventListener("mouseenter", (e) => {
+            // Start a timer when the mouse enters the color option
+            hoverTimer = setTimeout(() => {
+                const selectedColor = e.target.classList[1]; // Get the color class
+                speakColor(selectedColor); // Speak the color name
+            }, 500); // 1 second delay
+        });
+
+        colorOption.addEventListener("mouseleave", () => {
+            // Clear the timer if the mouse leaves before 1 second
+            clearTimeout(hoverTimer);
+        });
+    });
+
+    // Function to speak the color name
+    function speakColor(color) {
+        const utterance = new SpeechSynthesisUtterance(color);
+        speechSynthesis.speak(utterance);
+    }
+
 
 
     // Generate Secret Code
