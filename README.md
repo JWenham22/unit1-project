@@ -23,7 +23,7 @@ logical reasoning based on the feedback provided.
 
   |   Description | Screenshot | 
   |:-------------:| -----------|
-  | <h3 align="center">Game Page</h3> | ![image alt](https://github.com/JWenham22/unit1-project/blob/main/Screenshot%202025-01-09%20113636.png?raw=true)
+  | <h3 align="center">Game Page</h3> | ![image alt](https://github.com/JWenham22/unit1-project/blob/main/Screenshot%202025-01-09%20124501.png?raw=true)
   
 
    ## :computer: Technologies Used
