@@ -2,7 +2,7 @@
 
   # Mastermind
 
-  ### [Mastermind Game](https://jwenham22.github.io/unit1-project/)
+  ### [Play Mastermind](https://jwenham22.github.io/unit1-project/)
 
   ##### Jack Wenham
 
@@ -53,20 +53,19 @@ logical reasoning based on the feedback provided.
   <summary> How to change the background </summary>
     1. Click on the "Select a background" to reveal a dropdown. 
     2. Select the theme you would like as a background.
-    3. Once selected, click on the "Change Background" button in the bottom right corner.
+    3. Once selected, click on the "Change Background" button located at the bottom right of the page.
 </details>
 
 <details open>
-  <summary> Trello Board </summary>
-  <a href="https://trello.com/b/x4ViComX/meet-your-classmates-project-4"
-    > https://trello.com/b/x4ViComX/meet-your-classmates-project-4 </a
-  >
+  <summary> Audio </summary>
+    1. When hovering over the "Submit", "Reset" or "Delete" button as well as any color, audio will be played pertaining to what you are hovering over.
+    2. To turn off/on audio, click on the "Audio: On/Off" button located at the bottom right of the page above the "Change Background" button.
 </details>
 
 <details open>
-  <summary> Deployed Link (Heroku) </summary>
-  <a href="https://meetyourclassmates.herokuapp.com/"
-    > https://meetyourclassmates.herokuapp.com/ </a
+  <summary> Deployed Link </summary>
+  <a href="https://jwenham22.github.io/unit1-project/"
+    > https://jwenham22.github.io/unit1-project/ </a
   >
 </details>
   
