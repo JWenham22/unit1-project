@@ -35,7 +35,6 @@ logical reasoning based on the feedback provided.
   ![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git)
   ![Github](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)
   ![VSCode](https://img.shields.io/badge/-VS_Code-05122A?style=flat&logo=visualstudio)
-  ![Materialize CSS](https://img.shields.io/badge/-Materialize_CSS-05122A?style=flat&logo=materialdesign)
 
 
   ## :fire: Getting Started
@@ -67,5 +66,13 @@ logical reasoning based on the feedback provided.
     > https://jwenham22.github.io/unit1-project/ </a
   >
 </details>
+
+## :arrow_right: Upcoming Features
+
+- [:x:] A challenge game mode - 1 minute timer for each row. 
+
+- [:y:] Display functionality that shows the correct order of colors after game is over.
+
+- [:z:] ~~A hint feature~~
   
   </div>
